@@ -26,7 +26,10 @@ const ServerOn = () => {
 
             <div className="">
                 <h1 className="">Server : <span className='text-green-500 text-white font-semibold'>Online</span></h1>
-                <h1 className="">Server Run on Port : <span>5000</span></h1>
+                <h1 className="">Server Run on Port : <span className='text-green-500 text-white font-semibold'>5000</span></h1>
+
+                <button className='bg-blue-500 text-white rounded py-2 px-8 mt-4'>Continue</button>
+
             </div>
         </div>
     </div>
