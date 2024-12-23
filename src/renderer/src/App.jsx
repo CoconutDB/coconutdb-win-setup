@@ -1,8 +1,7 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const ipcHandle = () => window.electron.ipcRenderer.send('ping')
+  const ipcHandle = () => window.Electron.ipcRenderer.send('ping')
 
   return (
     <div className=""></div>
