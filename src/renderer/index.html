@@ -2,12 +2,24 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Electron</title>
+    <title>CoconutDB Win</title>
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
     />
+    <style>
+      /* For all elements */
+      * {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+      }
+
+      /* Hide scrollbar for webkit browsers (Chrome, Safari, etc.) */
+      *::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
