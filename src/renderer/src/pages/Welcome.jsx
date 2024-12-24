@@ -3,6 +3,7 @@ import CoconutImg from '../assets/CoconutDB.png'
 import { Link } from 'react-router-dom'
 
 const Welcome = () => {
+
   return (
     <div className='bg-[#24292e] min-h-screen'>
         <div className="mx-32 text-white py-16">
