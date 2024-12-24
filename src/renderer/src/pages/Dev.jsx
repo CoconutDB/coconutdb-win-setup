@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Collections from '../components/Collections';
+
 
 const Dev = () => {
     const [SeverOn, SetSeverOn] = useState('');
@@ -61,7 +63,15 @@ const Dev = () => {
 
                 <div className="">
                     <h1 className="">{fileTest}</h1>
+
+                    <div className="">
+                        <Collections files={files} />
+                    </div>
                 </div>
+            </div>
+
+            <div className="text-center text-sm">
+                v1.0.0-beta1 23 December 2024 | Developed and Maintained by <span className='text-blue-500'>JehanKandy</span>
             </div>
         </div>
     );
