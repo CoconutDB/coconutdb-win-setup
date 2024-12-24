@@ -18,7 +18,7 @@ const Welcome = () => {
 
             <div className="my-14">
                 <center>
-                    <Link to={'StartServer'}>
+                    <Link to={'dev'}>
                         <button className='bg-blue-600 rounded text-white py-2 px-4'>Quick Start</button>
                     </Link>
                 </center>

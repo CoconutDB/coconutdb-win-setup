@@ -4,29 +4,56 @@ import { IoIosHome } from "react-icons/io";
 import { Link } from 'react-router-dom';
 
 const ServerOn = () => {
-    const [isBackendRunning, setIsBackendRunning] = useState(false);
-    const [files, setFiles] = useState([]);
-    const [ServerPort, SetServerPort] = useState(localStorage.getItem('port'));
+    const [isBackendRunning, setIsBackendRunning] = useState(0);
+    const [ServerPort, SetServerPort] = useState(localStorage.getItem('port') || '3000');
     const [ProtData, SetPortData] = useState({
         portno: ServerPort,
     });
+    const [files, setFiles] = useState([]);
+    const [fileTest, SetFilesText] = useState('');
+
+    // useEffect(() => {
+    //     axios.get(import.meta.env.VITE_APP_API + ServerPort + '/config/isServerOn')
+    //     .then(res => {
+    //         if(res.data.Result === "Connected"){
+    //             setIsBackendRunning(1)
+    //         }
+    //         else{
+    //             setIsBackendRunning(0)
+    //         }
+    //     })
+    // }, [])
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:5000/config/dbconfig`)
-            .then((response) => {
-                if (response.status === 200) {
-                    setIsBackendRunning(true);
-                    setFiles(response.data);
-                } else {
-                    setIsBackendRunning(false);
-                }
-            })
-            .catch((error) => {
-                console.error('Error connecting to backend:', error);
-                setIsBackendRunning(false);
-            });
+        if (ServerPort) {
+            axios.get(`${import.meta.env.VITE_APP_API}${ServerPort}/config/isServerOn`)
+                .then(res => {
+                    setIsBackendRunning(res.data.Result === "Connected" ? 1 : 0);
+                })
+                .catch(() => setIsBackendRunning(0));
+        }
     }, [ServerPort]);
+
+    useEffect(() => {
+
+        axios
+          .get(`${import.meta.env.VITE_APP_API}${ServerPort}/config/dbconfig`)
+          .then((response) => {
+            if (response.status === 200) {
+              setFiles(response.data); 
+              SetFilesText('Collection Found')
+            } else {
+              SetFilesText('No Collection Found')
+            }
+          })
+          .catch((error) => {
+            console.error('Error connecting to backend:', error);
+          });
+    }, []); 
+    
+
+    const servaerURL = import.meta.env.VITE_APP_API + ServerPort + '/config/isServerOn';
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -55,7 +82,7 @@ const ServerOn = () => {
                 <h1 className="mt-4 pb-2">Configure Backend</h1>
                 <hr className='w-1/2 '/>
 
-                <p>{import.meta.env.VITE_APP_API}{ServerPort}</p>
+                <p className="">{servaerURL}, {isBackendRunning}</p>
 
                 <p>
                     {isBackendRunning ? (
@@ -65,7 +92,6 @@ const ServerOn = () => {
                     )}
                 </p>
 
-                <p className="">{files[1]}</p>
 
                 <form method="post" onSubmit={chagePort}>
                     <p className="mt-4">Enter Backend Running Port (Server Port)</p>
